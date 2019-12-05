@@ -157,6 +157,7 @@ function articleCreator(articleInfo) {
   secondP.textContent = articleInfo.secondParagraph;
   thirdP.textContent = articleInfo.thirdParagraph;
 
+
   // add event listener for button
   buttonExpand.addEventListener("click", event => {
     console.log("button clicked", event.target);
