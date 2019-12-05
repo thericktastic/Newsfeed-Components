@@ -2,8 +2,17 @@
 /* Look over this data, then proceed to line 91*/
 const data = [
   {
+    title: "Disco Elysium: Why is it the greatest RPG we've seen in years?",
+    date: "Dec 5th, 2019",
+    firstParagraph: `Disco Elysium is a detective RPG of improbable depth. It's part Planescape: Torment, part police procedural, part psychodrama. Your fatally hungover detective peels himself off the carpet, naked except for a pair of soiled underpants, and begins the laborious process of piecing his broken mind back together, while simultaneously attempting to solve a gruesome murder on the wrong side of the tracks.`,
+
+    secondParagraph: `Through conversations you control every facet of your personality. You're given a variety of ways to respond to people, and this dictates your personality, how the population reacts to you, and the outcomes of quests. The things you say and decisions you make in Disco Elysium really, actually matter, affecting your role in the world and the inner workings of your mind in a meaningful way.`,
+
+    thirdParagraph: `The thing about Disco Elysium is that my experience of it is completely unique to me, such is the dizzying variety of skills, stats, thoughts, and conversation options on offer. You could play through it five times and still not see everything, so there's no one experience to assess. But I can say with certainty that it's one of the finest RPGs on PC if you value depth, freedom, customisation, and storytelling.`
+  },
+  {
     title: 'Lambda School Students: "We\'re the best!"',
-    date: 'Nov 5th, 2018',
+    date: "Nov 5th, 2019",
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
         moff wicket tatooine luke.Solo wampa wampa calrissian yoda moff.Darth grievous darth gonk darth hutt.Darth baba skywalker
         watto fett jango maul han.Mon ewok sidious sidious lando kenobi grievous gamorrean solo.Yoda wedge utapau darth calamari.
@@ -23,8 +32,8 @@ const data = [
         moff calamari mon obi-wan. Solo grievous lando coruscant. Jinn darth palpatine obi-wan mon.`
   },
   {
-    title: 'Javascript and You, ES6',
-    date: 'May 7th, 2019',
+    title: "Javascript and You, ES6",
+    date: "May 7th, 2019",
     firstParagraph: `Alohamora wand elf parchment, Wingardium Leviosa hippogriff, house dementors betrayal. Holly, Snape centaur portkey ghost
         Hermione spell bezoar Scabbers. Peruvian-Night-Powder werewolf, Dobby pear-tickle half-moon-glasses, Knight-Bus. Padfoot
         snargaluff seeker: Hagrid broomstick mischief managed. Snitch Fluffy rock-cake, 9 ¾ dress robes I must not tell lies. Mudbloods
@@ -43,8 +52,8 @@ const data = [
         sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`
   },
   {
-    title: 'React vs Angular vs Vue',
-    date: 'June 7th, 2019',
+    title: "React vs Angular vs Vue",
+    date: "June 7th, 2019",
     firstParagraph: `Bulbasaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ivysaur Lorem ipsum dolor sit amet, consectetur adipiscing
         elit. Venusaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charmander Lorem ipsum dolor sit amet, consectetur
         adipiscing elit. Charmeleon Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charizard Lorem ipsum dolor sit amet,
@@ -71,8 +80,8 @@ const data = [
         Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
   },
   {
-    title: 'Professional Software Development in 2019',
-    date: 'Jan 1st, 2019',
+    title: "Professional Software Development in 2019",
+    date: "Jan 1st, 2019",
     firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
           hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
           Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
@@ -107,8 +116,72 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function articleCreator(articleInfo) {
+  // define new elements
+  const article = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const firstP = document.createElement("p");
+  const secondP = document.createElement("p");
+  const thirdP = document.createElement("p");
+  const buttonExpand = document.createElement("span");
+  const buttonCollapse = document.createElement("span");
+
+  // set class names
+  article.classList.add("article");
+  articleDate.classList.add("date");
+  buttonExpand.classList.add("expandButton");
+  buttonCollapse.classList.add("collapseButton", "hide-btn");
+
+  // set up structure of the elements
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstP);
+  article.appendChild(secondP);
+  article.appendChild(thirdP);
+  article.appendChild(buttonExpand);
+  article.appendChild(buttonCollapse);
+
+  // set text content
+  buttonExpand.textContent = "\u25bc";
+  buttonCollapse.textContent = "\u25b2";
+  articleTitle.textContent = articleInfo.title;
+  articleDate.textContent = articleInfo.date;
+  firstP.textContent = articleInfo.firstParagraph;
+  secondP.textContent = articleInfo.secondParagraph;
+  thirdP.textContent = articleInfo.thirdParagraph;
+
+
+  // add event listener for button
+  buttonExpand.addEventListener("click", event => {
+    console.log("button clicked", event.target);
+
+    buttonExpand.classList.toggle("hide-btn");
+    buttonCollapse.classList.toggle("hide-btn");
+
+    article.classList.toggle("article-open");
+  });
+
+  buttonCollapse.addEventListener("click", event => {
+    console.log("button clicked", event.target);
+
+    buttonCollapse.classList.toggle("hide-btn");
+    buttonExpand.classList.toggle("hide-btn");
+
+    article.classList.toggle("article-open");
+  });
+
+  return article;
+}
+
+const articles = document.querySelector(".articles");
+
+data.forEach(obj => {
+  articles.appendChild(articleCreator(obj));
+});
